@@ -1,5 +1,5 @@
 Resources:
-  MicroservicesTemplateLB01:
+  MicroservicesTemplateLB:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
