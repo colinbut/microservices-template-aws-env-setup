@@ -1,0 +1,88 @@
+Resources:
+  MicroservicesTemplateLB01:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId:
+        Fn::FindInMap:
+          - RegionMap
+          - !Ref AWS::Region
+          - AMI
+      SecurityGroups:
+        - !Ref LoadBalancerSecurityGroup
+      Tags:
+        - Key: Name
+          Value: MicroservicesTemplateLoadBalancer
+      KeyName: !Ref KeyName
+  MicroservicesTemplateWeb01:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId:
+        Fn::FindInMap:
+          - RegionMap
+          - !Ref AWS::Region
+          - AMI
+      SecurityGroups:
+        - !Ref WebDMZSecurityGroup
+      Tags:
+        - Key: Name
+          Value: MicroservicesTemplateWeb01
+      KeyName: !Ref KeyName
+  MicroservicesTemplateWeb02:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId:
+        Fn::FindInMap:
+          - RegionMap
+          - !Ref AWS::Region
+          - AMI
+      SecurityGroups:
+        - !Ref WebDMZSecurityGroup
+      Tags:
+        - Key: Name
+          Value: MicroservicesTemplateWeb02
+      KeyName: !Ref KeyName
+  MicroservicesTemplateWeb03:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId:
+        Fn::FindInMap:
+          - RegionMap
+          - !Ref AWS::Region
+          - AMI
+      SecurityGroups:
+        - !Ref WebDMZSecurityGroup
+      Tags:
+        - Key: Name
+          Value: MicroservicesTemplateWeb03
+      KeyName: !Ref KeyName
+  WebDMZSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable Web Access and SSH 
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+  LoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable Web Access and SSH 
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        
