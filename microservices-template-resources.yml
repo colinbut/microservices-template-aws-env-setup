@@ -1,3 +1,5 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Template to create Environment resources for Microservices Template
 Resources:
   MicroservicesTemplateLB:
     Type: AWS::EC2::Instance
