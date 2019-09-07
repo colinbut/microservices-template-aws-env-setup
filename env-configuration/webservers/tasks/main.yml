@@ -1,2 +1,6 @@
 ---
-# tasks file for webservers
+- name: Install Java 8
+  yum: name=java-1.8.0-openjdk state=present
+
+- name: Check status of Java
+  command: "java -version"

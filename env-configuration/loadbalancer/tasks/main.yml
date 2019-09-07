@@ -1,2 +1,17 @@
 ---
-# tasks file for loadbalancer
+- name: Install Apache
+  yum: name=httpd state=present
+
+- name: Restart Apache
+  service: name=httpd state=started enabled=yes
+
+- name: Creating LB config template
+  template:
+    src: ../templates/lb-config.j2
+    dest: /etc/httpd/conf.d/lb.conf
+    owner: bin
+    group: wheel
+    mode: 064
+
+- name: Restart Apache
+  service: name=httpd state=restarted
