@@ -15,3 +15,6 @@
 
 - name: Restart Apache
   service: name=httpd state=restarted
+
+- name: Make Apache start as soon as server is started
+  command: "chkconfig httpd on"
