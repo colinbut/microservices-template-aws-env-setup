@@ -162,3 +162,20 @@ Resources:
           ToPort: 22
           CidrIp: 0.0.0.0/0
       VpcId: !Ref VPC
+Outputs:
+  Web01_ServerDns:
+    Value: !GetAtt
+      - MicroservicesTemplateWeb01
+      - PublicDnsName
+  Web02_ServerDns:
+    Value: !GetAtt
+      - MicroservicesTemplateWeb02
+      - PublicDnsName
+  Web03_ServerDns:
+    Value: !GetAtt
+      - MicroservicesTemplateWeb03
+      - PublicDnsName
+  LB_ServerDns:
+    Value: !GetAtt
+      - MicroservicesTemplateLB
+      - PublicDnsName
