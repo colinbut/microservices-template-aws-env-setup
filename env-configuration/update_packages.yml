@@ -1,6 +1,0 @@
----
-  - hosts: webservers:loadbalancers
-    become: true
-    tasks:
-      - name: yum update on webservers and loadbalancers
-        yum: name="*" state=latest

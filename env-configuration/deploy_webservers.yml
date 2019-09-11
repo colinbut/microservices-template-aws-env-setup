@@ -2,4 +2,5 @@
   - hosts: webservers
     become: true
     roles:
+      - common
       - webservers

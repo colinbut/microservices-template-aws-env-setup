@@ -1,2 +1,3 @@
 ---
-# tasks file for common
+- name: yum update on webservers and loadbalancers
+  yum: name="*" state=latest

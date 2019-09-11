@@ -2,4 +2,5 @@
   - hosts: loadbalancers
     become: true
     roles:
+      - common
       - loadbalancer
