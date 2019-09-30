@@ -119,3 +119,27 @@ resource "aws_instance" "MicroservicesTemplateWeb01" {
       Name = "${var.configuration-name}Web01"
   }
 }
+
+resource "aws_instance" "MicroservicesTemplateWeb02" {
+  ami = "${var.eu-west-1_AMI}"
+  instance_type = "${var.ec2_instance_type}"
+  subnet_id = "${aws_subnet.public-subnet-A.id}"
+  vpc_security_group_ids = ["${aws_security_group.WebDMZ.id}"]
+  associate_public_ip_address = true
+  key_name = "MyIrelandKP"
+  tags = {
+      Name = "${var.configuration-name}Web02"
+  }
+}
+
+resource "aws_instance" "MicroservicesTemplateWeb03" {
+  ami = "${var.eu-west-1_AMI}"
+  instance_type = "${var.ec2_instance_type}"
+  subnet_id = "${aws_subnet.public-subnet-A.id}"
+  vpc_security_group_ids = ["${aws_security_group.WebDMZ.id}"]
+  associate_public_ip_address = true
+  key_name = "MyIrelandKP"
+  tags = {
+      Name = "${var.configuration-name}Web03"
+  }
+}
