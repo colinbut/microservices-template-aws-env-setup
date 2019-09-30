@@ -102,6 +102,7 @@ resource "aws_instance" "MicroservicesTemplateLB" {
   subnet_id = "${aws_subnet.public-subnet-A.id}"
   vpc_security_group_ids = ["${aws_security_group.LBSG.id}"]
   associate_public_ip_address = true
+  key_name = "MyIrelandKP"
   tags = {
       Name = "${var.configuration-name}LB"
   }
@@ -113,6 +114,7 @@ resource "aws_instance" "MicroservicesTemplateWeb01" {
   subnet_id = "${aws_subnet.public-subnet-A.id}"
   vpc_security_group_ids = ["${aws_security_group.WebDMZ.id}"]
   associate_public_ip_address = true
+  key_name = "MyIrelandKP"
   tags = {
       Name = "${var.configuration-name}Web01"
   }
