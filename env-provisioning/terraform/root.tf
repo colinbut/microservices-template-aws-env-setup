@@ -4,7 +4,7 @@ terraform {
         key = "terraform-state-colin-s3/path_to_my_key"
         region = "us-east-1"
     }
-    required_version = ">= 0.12.9"
+    required_version = ">= 0.12.4"
 }
 
 
