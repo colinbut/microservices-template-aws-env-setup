@@ -1,5 +1,5 @@
 locals {
-  ami = "${lookup(var.region_to_ami_map, terraform.workspace, "ami-0bbc25e23a7640b9b")}"
+  ami     = "${lookup(var.region_to_ami_map, terraform.workspace, "ami-0bbc25e23a7640b9b")}"
   keypair = "${lookup(var.region_to_keypair_map, terraform.workspace, "MyIrelandKP")}"
 }
 
@@ -41,33 +41,33 @@ resource "aws_route_table" "public-route-table-A" {
 }
 
 resource "aws_route_table_association" "public-route-table-association-A" {
-  subnet_id = "${aws_subnet.public-subnet-A.id}"
-  route_table_id = "${aws_route_table.public-route-table-A.id}"
+  subnet_id       = "${aws_subnet.public-subnet-A.id}"
+  route_table_id  = "${aws_route_table.public-route-table-A.id}"
 }
 
 resource "aws_security_group" "LBSG" {
   name = "LBSG"  
   description = "Allow Http access and SSH"
-  vpc_id = "${aws_vpc.VPC.id}"
+  vpc_id      = "${aws_vpc.VPC.id}"
 
   ingress {
-      from_port = 80
-      to_port = 80
-      protocol = "tcp"
+      from_port   = 80
+      to_port     = 80
+      protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-      from_port = 22
-      to_port = 22
-      protocol = "tcp"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-      from_port = 0
-      to_port = 0
-      protocol = -1
+      from_port   = 0
+      to_port     = 0
+      protocol    = -1
       cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -79,35 +79,35 @@ resource "aws_security_group" "WebDMZ" {
   vpc_id = "${aws_vpc.VPC.id}"
 
   ingress {
-      from_port = 8080
-      to_port = 8080
-      protocol = "tcp"
+      from_port   = 8080
+      to_port     = 8080
+      protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-      from_port = 22
-      to_port = 22
-      protocol = "tcp"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-      from_port = 0
-      to_port = 0
-      protocol = -1
+      from_port   = 0
+      to_port     = 0
+      protocol    = -1
       cidr_blocks = ["0.0.0.0/0"]
   }
 
 }
 
 resource "aws_instance" "MicroservicesTemplateLB" {
-  ami = "${local.ami}"
-  instance_type = "${var.ec2_instance_type}"
-  subnet_id = "${aws_subnet.public-subnet-A.id}"
-  vpc_security_group_ids = ["${aws_security_group.LBSG.id}"]
+  ami                         = "${local.ami}"
+  instance_type               = "${var.ec2_instance_type}"
+  subnet_id                   = "${aws_subnet.public-subnet-A.id}"
+  vpc_security_group_ids      = ["${aws_security_group.LBSG.id}"]
   associate_public_ip_address = true
-  key_name = "${local.keypair}"
+  key_name                    = "${local.keypair}"
   tags = {
       Name = "${var.configuration-name}LB"
   }
