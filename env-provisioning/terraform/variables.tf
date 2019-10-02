@@ -59,8 +59,8 @@ variable "region_to_keypair_map" {
 
     default = {
       eu-west-1 = "MyIrelandKP"
-      eu-west-2 = ""
-      us-west-1 = ""
-      ap-southeast-2 = ""
+      eu-west-2 = "MyLondonKP"
+      us-west-1 = "MyKPWebServer"
+      ap-southeast-2 = "MySydneyKP"
     }
 }
