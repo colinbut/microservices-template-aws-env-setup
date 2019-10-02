@@ -1,6 +1,6 @@
 locals {
-  ami = "${lookup(var.region_to_ami_map, terraform.workspace, "eu-west-1")}"
-  keypair = "${lookup(var.region_to_keypair_map, terraform.workspace, "eu-west-1")}"
+  ami = "${lookup(var.region_to_ami_map, terraform.workspace, "ami-0bbc25e23a7640b9b")}"
+  keypair = "${lookup(var.region_to_keypair_map, terraform.workspace, "MyIrelandKP")}"
 }
 
 resource "aws_vpc" "VPC" {
