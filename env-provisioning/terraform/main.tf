@@ -111,6 +111,15 @@ resource "aws_instance" "MicroservicesTemplateLB" {
   tags = {
       Name = "${var.configuration-name}LB"
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "yum update -y",
+      "yum install httpd -y",
+      "service httpd start",
+      "chkconfig httpd on"
+    ]
+  }
 }
 
 resource "aws_instance" "MicroservicesTemplateWeb01" {
@@ -122,6 +131,13 @@ resource "aws_instance" "MicroservicesTemplateWeb01" {
   key_name = "${local.keypair}"
   tags = {
       Name = "${var.configuration-name}Web01"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "yum update -y",
+      "yum install java-1.8-openjdk -y"
+    ]
   }
 }
 
@@ -135,6 +151,13 @@ resource "aws_instance" "MicroservicesTemplateWeb02" {
   tags = {
       Name = "${var.configuration-name}Web02"
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "yum update -y",
+      "yum install java-1.8-openjdk -y"
+    ]
+  }
 }
 
 resource "aws_instance" "MicroservicesTemplateWeb03" {
@@ -146,5 +169,12 @@ resource "aws_instance" "MicroservicesTemplateWeb03" {
   key_name = "${local.keypair}"
   tags = {
       Name = "${var.configuration-name}Web03"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "yum update -y",
+      "yum install java-1.8-openjdk -y"
+    ]
   }
 }
