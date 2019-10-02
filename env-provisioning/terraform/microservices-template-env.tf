@@ -1,3 +1,8 @@
+locals {
+  ami = "${lookup(var.region_to_ami_map, terraform.workspace, "eu-west-1")}"
+  keypair = "${lookup(var.region_to_keypair_map, terraform.workspace, "eu-west-1")}"
+}
+
 resource "aws_vpc" "VPC" {
   cidr_block = "10.0.0.0/16"
   enable_dns_hostnames = true
@@ -97,48 +102,48 @@ resource "aws_security_group" "WebDMZ" {
 }
 
 resource "aws_instance" "MicroservicesTemplateLB" {
-  ami = "${var.eu-west-1_AMI}"
+  ami = "${local.ami}"
   instance_type = "${var.ec2_instance_type}"
   subnet_id = "${aws_subnet.public-subnet-A.id}"
   vpc_security_group_ids = ["${aws_security_group.LBSG.id}"]
   associate_public_ip_address = true
-  key_name = "MyIrelandKP"
+  key_name = "${local.keypair}"
   tags = {
       Name = "${var.configuration-name}LB"
   }
 }
 
 resource "aws_instance" "MicroservicesTemplateWeb01" {
-  ami = "${var.eu-west-1_AMI}"
+  ami = "${local.ami}"
   instance_type = "${var.ec2_instance_type}"
   subnet_id = "${aws_subnet.public-subnet-A.id}"
   vpc_security_group_ids = ["${aws_security_group.WebDMZ.id}"]
   associate_public_ip_address = true
-  key_name = "MyIrelandKP"
+  key_name = "${local.keypair}"
   tags = {
       Name = "${var.configuration-name}Web01"
   }
 }
 
 resource "aws_instance" "MicroservicesTemplateWeb02" {
-  ami = "${var.eu-west-1_AMI}"
+  ami = "${local.ami}"
   instance_type = "${var.ec2_instance_type}"
   subnet_id = "${aws_subnet.public-subnet-A.id}"
   vpc_security_group_ids = ["${aws_security_group.WebDMZ.id}"]
   associate_public_ip_address = true
-  key_name = "MyIrelandKP"
+  key_name = "${local.keypair}"
   tags = {
       Name = "${var.configuration-name}Web02"
   }
 }
 
 resource "aws_instance" "MicroservicesTemplateWeb03" {
-  ami = "${var.eu-west-1_AMI}"
+  ami = "${local.ami}"
   instance_type = "${var.ec2_instance_type}"
   subnet_id = "${aws_subnet.public-subnet-A.id}"
   vpc_security_group_ids = ["${aws_security_group.WebDMZ.id}"]
   associate_public_ip_address = true
-  key_name = "MyIrelandKP"
+  key_name = "${local.keypair}"
   tags = {
       Name = "${var.configuration-name}Web03"
   }
