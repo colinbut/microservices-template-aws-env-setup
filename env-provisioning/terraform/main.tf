@@ -114,11 +114,18 @@ resource "aws_instance" "MicroservicesTemplateLB" {
 
   provisioner "remote-exec" {
     inline = [
-      "yum update -y",
-      "yum install httpd -y",
-      "service httpd start",
-      "chkconfig httpd on"
+      "sudo yum update -y",
+      "sudo yum install httpd -y",
+      "sudo service httpd start",
+      "sudo chkconfig httpd on"
     ]
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      host        = "${aws_instance.MicroservicesTemplateLB.public_ip}"
+      private_key = file("~/dev/aws/MyIrelandKP.pem")
+    }
   }
 }
 
@@ -135,9 +142,16 @@ resource "aws_instance" "MicroservicesTemplateWeb01" {
 
   provisioner "remote-exec" {
     inline = [
-      "yum update -y",
-      "yum install java-1.8-openjdk -y"
+      "sudo yum update -y",
+      "sudo yum install java-1.8.0-openjdk -y"
     ]
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      host        = "${aws_instance.MicroservicesTemplateWeb01.public_ip}"
+      private_key = file("~/dev/aws/MyIrelandKP.pem")
+    }
   }
 }
 
@@ -154,9 +168,16 @@ resource "aws_instance" "MicroservicesTemplateWeb02" {
 
   provisioner "remote-exec" {
     inline = [
-      "yum update -y",
-      "yum install java-1.8-openjdk -y"
+      "sudo yum update -y",
+      "sudo yum install java-1.8.0-openjdk -y"
     ]
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      host        = "${aws_instance.MicroservicesTemplateWeb02.public_ip}"
+      private_key = file("~/dev/aws/MyIrelandKP.pem")
+    }
   }
 }
 
@@ -171,10 +192,18 @@ resource "aws_instance" "MicroservicesTemplateWeb03" {
       Name = "${var.configuration-name}Web03"
   }
 
+  # to be replaced with Ansible - as this part is more of configuration management
   provisioner "remote-exec" {
     inline = [
-      "yum update -y",
-      "yum install java-1.8-openjdk -y"
+      "sudo yum update -y",
+      "sudo yum install java-1.8.0-openjdk -y"
     ]
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      host        = "${aws_instance.MicroservicesTemplateWeb03.public_ip}"
+      private_key = file("~/dev/aws/MyIrelandKP.pem")
+    }
   }
 }
