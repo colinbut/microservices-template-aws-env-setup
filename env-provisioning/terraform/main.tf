@@ -136,7 +136,7 @@ resource "aws_instance" "MicroservicesTemplateWeb01" {
   provisioner "remote-exec" {
     inline = [
       "yum update -y",
-      "yum install java-1.8-openjdk -y"
+      "yum install java-1.8.0-openjdk -y"
     ]
   }
 }
@@ -155,7 +155,7 @@ resource "aws_instance" "MicroservicesTemplateWeb02" {
   provisioner "remote-exec" {
     inline = [
       "yum update -y",
-      "yum install java-1.8-openjdk -y"
+      "yum install java-1.8.0-openjdk -y"
     ]
   }
 }
@@ -174,7 +174,7 @@ resource "aws_instance" "MicroservicesTemplateWeb03" {
   provisioner "remote-exec" {
     inline = [
       "yum update -y",
-      "yum install java-1.8-openjdk -y"
+      "yum install java-1.8.0-openjdk -y"
     ]
   }
 }
