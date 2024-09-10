@@ -19,6 +19,6 @@ provider "aws" {
 
 module "compute" {
   source = "./compute"
-  
+  ec2_instance_type = "t2.micro"
 }
 
